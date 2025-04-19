@@ -1,1 +1,1 @@
-make run e depois make startExam
+make e depois make startExam

@@ -27,7 +27,7 @@ all: criaDiretorios build run
 criaDiretorios:
 	@echo "--- Task: Creating Local Directories ---"
 	@echo "Creating 'rendu' directory (for your work) and 'subjects' directory (for exam files)..."
-	@mkdir -p rendu subjects
+	@mkdir -p rendu subjects traces
 	@echo "Directories 'rendu' and 'subjects' ensured to exist."
 
 # Target 'build': Builds the Docker image for the exam environment.
@@ -46,7 +46,7 @@ run:
 	@echo " - Automatically removing container on exit (--rm): Ensures cleanup when stopped."
 	@echo " - Mounting local './rendu' to '/app/rendu' inside container (-v): Your work is saved locally."
 	@echo " - Mounting local './subjects' to '/app/subjects' inside container (-v): Access exam subjects locally."
-	@docker run -dit --rm --name exam-container -v "$(PWD)/rendu:/app/rendu" -v "$(PWD)/subjects:/app/subjects" exam-project
+	@docker run -dit --rm --name exam-container -v "$(PWD)/rendu:/app/rendu" -v "$(PWD)/subjects:/app/subjects" -v "$(PWD)/traces:/app/traces" exam-project
 	@echo "Container 'exam-container' started successfully in the background."
 	@echo "You can manually access the container's shell anytime using: docker exec -it exam-container zsh"
 
